@@ -1,4 +1,4 @@
-CREATE SCHEMA golang_test;
+CREATE SCHEMA IF NOT EXISTS golang_test;
 
 CREATE TABLE IF NOT EXISTS`articles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
