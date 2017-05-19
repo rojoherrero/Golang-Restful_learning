@@ -26,5 +26,17 @@ func GetArticleByID(w http.ResponseWriter, r *http.Request) {
 	article := services.RetrieveArticleByID(articleID)
 
 	json.NewEncoder(w).Encode(article)
+}
 
+// SaveArticle handler for persists a new article
+func SaveArticle(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var article services.Article
+	err := decoder.Decode(&article)
+	log.Print(article)
+	if err != nil {
+		log.Print(err.Error())
+	}
+	id := article.SaveArticle()
+	json.NewEncoder(w).Encode(HTTPResp{http.StatusOK, "Aricle created successfully", strconv.Itoa(int(id))})
 }

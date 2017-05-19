@@ -52,3 +52,16 @@ func RetrieveArticleByID(articleID int) Article {
 	}
 	return article
 }
+
+// SaveArticle persists article on te DB
+func (a *Article) SaveArticle() int64 {
+	db := connectToMariaDB()
+	defer db.Close()
+	stmt, _ := db.Prepare("INSERT INTO golang_test.articles (title,description,content) VALUES (?,?,?)")
+	res, err := stmt.Exec(a.Title, a.Desc, a.Content)
+	if err != nil {
+		log.Print(err.Error())
+	}
+	insertedID, _ := res.LastInsertId()
+	return insertedID
+}

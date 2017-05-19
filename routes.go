@@ -18,4 +18,5 @@ type Routes []Route
 var routes = Routes{
 	Route{"AllArticles", http.MethodGet, "/all", handlers.GetAllArticles},
 	Route{"GetArticleByID", http.MethodGet, "/article/{id}", handlers.GetArticleByID},
+	Route{"SaveArticle", http.MethodPost, "/article/save", handlers.SaveArticle},
 }
